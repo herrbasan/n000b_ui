@@ -1,0 +1,712 @@
+:root {
+	--color-highlight: 94, 149, 237, 1;
+	--color-highlight-dim: 94, 149, 237, 0.7;
+	--color-sidebar: 35, 35, 35, 0.95;
+	--color-back: 50, 50, 50, 1;
+	--color-card: 35, 35, 35, 0.95;
+	--color-card-border: 255, 255, 255, 0.07;
+	--color-text-dim: 210, 210, 210, 1;
+	--color-text: 255, 255, 255, 1;
+	--color-input-border: 255,255,255, 0.2;
+	--color-input-label: 255,255,255, 0.4;
+	--color-border: 255, 255, 255, 0.1;
+	--color-shadow: 0, 0, 0, 0.1;
+	--color-overlayback: 20, 20, 20, 0.95;
+	--color-media-back: 0, 0, 0, 0.9;
+	--color-timeline-widget: 80, 80, 80, 1;
+	--border-radius: 2;
+	--shadow-radius: 10;
+	--space-card-padding: 30;
+	--space-card-margin: 20;
+	--space-topbar-height: 0;
+	--space-sidebar-width: 300;
+}
+
+body {
+	position: relative;
+	font: caption;
+	font-family: 'Open Sans', sans-serif;
+	color: rgba(var(--color-text-dim));
+	font-weight: 400;
+	font-size: 15px;
+	background-color: rgba(var(--color-back));
+	margin: 0;
+	padding:0;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+
+.nui-hr {
+	height: 5px;
+	margin-bottom: 5px;
+	border-bottom: 1px solid rgba(var(--color-border));
+}
+
+.nui-copy {
+	font-weight: 300;
+	line-height: 1.5em;
+	font-size: 1em;
+}
+
+.nui-headline {
+	color: rgba(var(--color-highlight));
+	font-size: 1.4em;
+	margin-bottom: 1em;
+	font-weight: 300;
+}
+
+.nui-topbar {
+	position: fixed;
+	width: 100%;
+	height: calc(var(--space-topbar-height)*1px);
+	background: rgba(var(--color-card));
+	box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.3);
+	border-bottom: 1px solid rgba(var(--color-card-border));
+	z-index: 100;
+	overflow: hidden;
+}
+
+.nui-content {
+	position: fixed;
+	top: calc(var(--space-topbar-height)*1px);
+	left: calc(var(--space-sidebar-width)*1px);
+	right: 0px;
+	bottom: 0px;
+	overflow: auto;
+}
+
+.nui-page {
+	padding-bottom: 30px;
+	padding-top: 30px;
+	padding-left: 60px;
+	padding-right: 60px;
+	margin-left: auto;
+	margin-right: auto;
+	max-width:800px;
+	transition: all 0.4s;
+}
+
+.nui-card {
+	position: relative;
+	padding: calc(var(--space-card-padding) * 1px);
+	margin-bottom: calc(var(--space-card-margin) * 1px);
+	border: 1px solid rgba(var(--color-card-border));
+	border-radius: calc(var(--border-radius) * 1px);
+	background: rgba(var(--color-card));
+	box-shadow: 0px 0px calc(var(--shadow-radius) * 1px) 0px rgba(var(--color-shadow));
+}
+
+.nui-media {
+	position: relative;
+	padding: calc(var(--space-card-padding) * 1px);
+	margin-bottom: calc(var(--space-card-margin) * 1px);
+	border: 1px solid rgba(var(--color-card-border));
+	border-radius: calc(var(--border-radius) * 1px);
+	background: linear-gradient(180deg, rgba(var(--color-card)) 0%, rgba(var(--color-card)) 20%, rgba(0,0,0,1) 20%, rgba(0,0,0,1) 100%);
+	box-shadow: 0px 0px calc(var(--shadow-radius) * 1px) 0px rgba(var(--color-shadow));
+}
+
+
+/* n000b Sidebar */
+/* ######################################################################################### */
+
+.nui-sidebar {
+	position: fixed;
+	top: calc(var(--space-topbar-height)*1px);
+	left:0px;
+	bottom:0px;
+	padding-right: 3px;
+	width: calc(var(--space-sidebar-width)*1px);
+	background: rgba(var(--color-sidebar));
+	box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.3);
+	border-right: 1px solid rgba(var(--color-card-border));
+	z-index: 99;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.nui-sidebar-item {
+	display: table;
+	width: 100%;
+	height: 50px;
+	cursor: pointer;
+	color: rgba(255,255,255,0.5);
+	border-left: 3px solid rgba(255,255,255,0);
+	transition: all 0.2s;
+}
+
+.nui-sidebar-item i {
+	display: table-cell;
+	vertical-align: middle;
+	padding-left: 40px;
+	font-size: 24px;
+	line-height: 1em;
+	width: 40px;
+}
+.nui-sidebar-item span {
+	display: table-cell;
+	vertical-align: middle;
+	padding-right: 20px;
+	font-size: 0.9em;
+	line-height: 1em;
+}
+
+.nui-sidebar-item:hover {
+	color: rgba(var(--color-highlight));
+	background-color: rgba(255,255,255,0.05);
+}
+
+.nui-sidebar-item.active {
+	background-color: rgba(255,255,255,0.1);
+	color: #fff;
+	border-left: 3px solid rgba(var(--color-highlight));
+}
+
+/* n000b Buttons */
+/* ######################################################################################### */
+
+.nui-button-container-right { text-align: right; overflow: auto; margin-right: -5px }
+.nui-button-container-right div { float: right; margin: 5px; }
+.nui-button-container-left { text-align: left; overflow: auto; margin-left: -5px }
+.nui-button-container-left div { float: left; margin: 5px; }
+
+.nui-button-1 {
+	position: relative;
+	font-size: 0.8em;
+	padding-bottom: 0.2em;
+	text-transform: uppercase;
+	display: inline-block;
+	border-bottom: 1px solid rgba(var(--color-highlight-dim));
+	cursor: pointer;
+	user-select: none;
+	white-space: nowrap;
+	transition: all 0.2s;
+}
+.nui-button-1:hover {
+	color: rgba(var(--color-highlight));
+	border-bottom: 1px solid rgba(var(--color-highlight));
+}
+
+.nui-button-2 {
+	position: relative;
+	font-size: 0.8em;
+	padding-bottom: 0.2em;
+	text-transform: uppercase;
+	display: inline-block;
+	cursor: pointer;
+	user-select: none;
+	white-space: nowrap;
+	transition: all 0.2s;
+	padding-top:10px;
+	padding-bottom:10px;
+	padding-left:15px;
+	padding-right:15px;
+	border-radius: calc(var(--border-radius) * 1px);
+	background: rgba(var(--color-card));
+	box-shadow: 0px 0px calc(var(--shadow-radius) * 1px) 0px rgba(var(--color-shadow));
+	border-bottom: 2px solid rgba(var(--color-highlight-dim));
+}
+
+.nui-button-2:hover {
+	color: rgba(var(--color-highlight));
+	background: rgba(var(--color-card));
+	border-bottom: 2px solid rgba(var(--color-highlight));
+}
+
+.nui-button-3 {
+	position: relative;
+	font-size: 0.8em;
+	padding-bottom: 0.2em;
+	text-transform: uppercase;
+	display: inline-block;
+	cursor: pointer;
+	user-select: none;
+	white-space: nowrap;
+	padding-top:10px;
+	padding-bottom:10px;
+	padding-left:15px;
+	padding-right:15px;
+	color: rgba(var(--color-text));
+	background: rgba(var(--color-highlight-dim));
+	box-shadow: 0px 0px calc(var(--shadow-radius) * 1px) 0px rgba(var(--color-shadow),0.1);
+	border-radius: calc(var(--border-radius) * 1px);
+	transition: all 0.2s;
+}
+
+.nui-button-3:hover {
+	color: rgba(var(--color-text));
+	background: rgba(var(--color-highlight));
+}
+
+.nui-button-flash:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: white;
+	opacity: 0;
+	pointer-events: none;
+}
+.nui-button-flash:active:after { opacity: 0.2;}
+.nui-button-flash:not(:active):after { transition: all 0.5s; }
+
+/* n000b Window */
+/* ######################################################################################### */
+
+.nui-window {
+	position: relative;
+	transition: background 0.1s linear;
+	border-radius: calc(var(--border-radius) * 1px);
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.nui-window .nui-window-top {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 40px;
+}
+.nui-window .nui-window-top span {
+	position: absolute;
+	top: 4px;
+	line-height: 40px;
+	padding-left: 30px;
+	font-size: 0.8em;
+	text-transform: uppercase;
+	color: rgba(255,255,255,0.2);
+}
+.nui-window .nui-window-top i {
+	position: absolute;
+	top: 5px;
+	right: 0px;
+	padding: 5px;
+	cursor: pointer;
+	color: rgba(255,255,255,0.2);
+}
+
+.nui-window .nui-window-top i:hover {
+	color: rgba(255,255,255,0.7);
+}
+
+.nui-window .nui-window-content {
+	position: absolute;
+	top: 50px;
+	left: 10px;
+	right: 13px;
+	bottom: 20px;
+	padding-left: 20px;
+	padding-right: 30px;
+	overflow-y: auto;
+}
+.nui-window .nui-window-bottom {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 20px;
+}
+
+/* n000b Overlay */
+/* ######################################################################################### */
+
+.nui-overlay {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(var(--color-overlayback));
+	z-index: 100;
+}
+
+.nui-alert {
+	position: absolute;
+	top: 100px;
+	padding: calc(var(--space-card-padding) * 1px);
+	max-width: 500px;
+	min-width: 200px;
+}
+
+.ani-slide-in {animation: ani-slide-in 0.4s; }
+@keyframes ani-slide-in { 0%   { top:100%; opacity: 0; } 100% { top:0; opacity: 1; } }
+.ani-slide-out {animation: ani-slide-out 0.4s; }
+@keyframes ani-slide-out { 0%   { top:0; opacity: 1; } 100% { top:100%; opacity: 0; } }
+
+
+/* n000b Input */
+/* ######################################################################################### */
+
+.nui-input {
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.nui-input div{
+	color: rgba(var(--color-input-label));
+	width: 100%;
+	font-size: 0.8em;
+	text-transform: uppercase;
+}
+
+.nui-input input{
+	font-family: inherit;
+	color: rgba(var(--color-text-dim));
+	margin:0;
+	border:0;
+	padding-top:5px;
+	padding-bottom:5px;
+	width: 100%;
+	font-size: 1em;
+	outline:0;
+	background:none;
+	line-height:1em;
+	box-sizing:content-box;
+	border-bottom: 1px solid rgba(var(--color-input-border));
+	border-radius: 0px;
+	transition: all 0.2s;
+}
+
+.nui-input input:focus {
+	color: rgba(var(--color-highlight));
+	border-bottom: 1px solid rgba(var(--color-highlight));
+}
+
+/* n000b Radio Buttons */
+/* ######################################################################################### */ 
+
+fieldset {
+	border: 0;
+	padding: 0;
+	margin: 0;
+}
+.nui-fieldset .nui-fieldset-label {
+	color: rgba(var(--color-input-label));
+	width: 100%;
+	font-size: 0.8em;
+	text-transform: uppercase;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.nui-radio {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-right: 10px;
+}
+.nui-radio input {
+  display: none;
+}
+
+.nui-radio label:after {
+	content: '';
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	width: 9px;
+	height: 9px;
+	background: rgba(var(--color-highlight));
+	border-radius: 50%;
+	display: block;
+	opacity: 0;
+	transition: all 0.2s;
+	transform: scale(0,0);
+	pointer-events: none;
+}
+
+.nui-radio input:checked + label:after {
+	opacity: 1;
+	transform: scale(1,1);
+}
+
+.nui-radio label {
+	position: relative;
+	padding-left: 30px;
+	min-height: 19px;
+	display: block;
+	line-height: 19px;
+	cursor: pointer;
+	transition: all 0.1s;
+}
+
+/*.nui-radio:hover label {
+	color: rgb(var(--color-highlight))
+}*/
+
+.nui-radio label:before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	display: block;
+	transition: all 0.1s;
+	border: 2px solid rgba(var(--color-input-border));
+}
+
+.nui-radio:hover label:before{
+	border: 2px solid rgba(var(--color-highlight));
+}
+
+/* n000b Radio Buttons */
+/* ######################################################################################### */ 
+
+.nui-checkbox {
+	position: relative;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-right: 10px;
+}
+.nui-checkbox input {
+	display:none;
+}
+.nui-checkbox i {
+	position: absolute;
+	top: 6px;
+	left: 1px;
+	font-size: 17px;
+	line-height: 17px;
+	color: rgba(var(--color-highlight));
+	font-weight: bolder;
+	transform-origin: 50% 50%;
+	transform: scale(0,0);
+	opacity: 0;
+	pointer-events: none;
+	transition: all 0.2s;
+}
+.nui-checkbox:hover label:before {
+	border: 2px solid rgba(var(--color-highlight));
+}
+.nui-checkbox input:checked + i {
+	transform: scale(1,1);
+	opacity: 1;
+}
+
+.nui-checkbox label {
+	position: relative;
+	padding-left: 33px;
+	display: block;
+	line-height: 22px;
+	cursor: pointer;
+}
+.nui-checkbox label:before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 15px;
+	height: 15px;
+	border-radius: calc(var(--border-radius) * 1px);
+	display: block;
+	border: 2px solid rgba(var(--color-input-border));
+	transition: all 0.15s;
+}
+
+::selection {
+  background: rgba(99,180,255, 0.2);
+}
+::-moz-selection {
+  background: rgba(99,180,255, 0.2);
+}
+
+
+/* n000b Timeline Widget */
+/* ######################################################################################### */ 
+.nui-timeline {
+	position: relative;
+	display: table;
+	width: 100%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.nui-timeline-playpause {
+	display: table-cell;
+	width: 20px;
+	vertical-align: middle;
+}
+.nui-timeline-bar {
+	display: table-cell;
+	width: auto;
+	vertical-align: middle;
+	height: 40px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+.nui-timeline-bar div:nth-child(1) {
+	height: 5px;
+	width: 100%;
+	background: rgba(255,255,255,0.1);
+}
+.nui-timeline-bar div:nth-child(1) div:nth-child(1){
+	height: 100%;
+	width: 50%;
+	background: rgba(var(--color-highlight));
+}
+.nui-timeline-time {
+	display: table-cell;
+	width: 80px;
+	text-align: right;
+	vertical-align: middle;
+}
+.nui-timeline-duration {
+	display: table-cell;
+	width: 80px;
+	text-align: right;
+	vertical-align: middle;
+}
+
+.nui-timeline-widget {
+	font-size: 0.8em;
+	position: absolute;
+	top: 15px;
+	left: 150px;
+	color: rgba(var(--color-text));
+	width: 70px;
+	height: 25px;
+	text-align: center;
+	line-height: 25px;
+	background-color: rgba(var(--color-timeline-widget));
+	transform-origin: 50% 100%;
+	border-radius: 1px;
+	filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.1));
+ }
+
+.nui-timeline-widget:after {
+	content: "";
+	height: 0;
+	position: absolute;
+	width: 0;
+	border-color: transparent;
+	border-style: solid;
+	border-top-color: rgba(var(--color-timeline-widget));
+	border-width: 8px;
+	left: 50%;
+	top: 100%;
+	margin-left: -8px;
+}
+
+/* n000b Connection Spinner */
+/* ######################################################################################### */
+
+.nui-spinner {
+	display: flex;
+	justify-content: center;
+	width: 31px;
+	height: 31px;
+	transform-origin: top left;
+	transform: scale(1,1); /* it needs that for some reason */
+	border-radius: 50%;
+}
+
+.nui-spinner-light {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+	width: 25%;
+	height: 25%;
+	background-color: green;
+	border-radius: 50%;
+	animation: pulse 1s linear infinite;
+}
+
+.nui-spinner:after {
+	display: flex;
+	margin: auto;
+	content: " ";
+	width: 50%;
+	height: 50%;
+	border-radius: 50%;
+	border: 3px solid #fff;
+	border-color: rgba(255,255,255, 1) transparent rgba(255,255,255, 1) transparent;
+	animation: full_rotation 1.5s linear infinite;
+}
+
+.nui-spinner.connecting .nui-spinner-light { background-color: #e8d452; }
+.nui-spinner.connected .nui-spinner-light { background-color: #a7e852; }
+.nui-spinner.nocoonection .nui-spinner-light { background-color: #e85353; }
+
+.nui-spinner.connecting:after { animation: full_rotation 1s linear infinite; opacity:0.7;}
+.nui-spinner.connected:after { animation: none; transform: rotate(90deg); opacity:0.2;}
+.nui-spinner.nocoonection:after { animation: full_rotation_reverse 3s infinite; opacity:0.2;}
+
+@keyframes full_rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes full_rotation_reverse {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
+.video-container {
+	position: fixed;
+	z-index: -1;
+	width: 100%;
+	height: 100%
+}
+.video-container video {
+  /* Make video to at least 100% wide and tall */
+  min-width: 100%; 
+  min-height: 100%; 
+  
+  /* Setting width & height to auto prevents the browser from stretching or squishing the video */
+  width: auto;
+  height: auto;
+  
+  /* Center the video */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
+.nui-hide { display: none; }
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+	background: rgba(255,255,255,0.1); 
+}
+ 
+::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.3); 
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255,255,255,0.5);  
+}
+
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
